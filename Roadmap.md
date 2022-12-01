@@ -18,6 +18,8 @@ Notes
 - [] Booking/Promoters
 - [] Add an Event
 - [] Add a Band
+- [] Add a Promoter
+- [] Add a Venue
 - [] Miscellaneous Section
 ~~- [] Forum~~
 

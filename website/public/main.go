@@ -46,7 +46,9 @@ func main() {
 	router.HandleFunc("GET", "/promoter/", handleNotDoneYet)
 	router.HandleFunc("GET", "/promoter/submit", handleNotDoneYet)
 
-	log.Fatalln(http.ListenAndServe(":80", router))
+	port := ":80"
+	log.Printf("up and running on %s", port)
+	log.Fatalln(http.ListenAndServe(port, router))
 }
 
 func handleMethodNotAllowed(w http.ResponseWriter, r *http.Request) {
@@ -62,9 +64,12 @@ func handleHealthCheck(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleNotDoneYet(w http.ResponseWriter, r *http.Request) {
-	simpleMessageTemplate, err := template.ParseFiles("templates/simple-message.html")
+	simpleMessageTemplate, err := template.ParseFiles("templates/simple-message2.html")
 	if err != nil {
 		log.Printf("err: %s", err.Error())
+		w.WriteHeader(http.StatusNotImplemented)
+		fmt.Fprintf(w, "Not Done Yet")
+		return
 	}
 	data := templates.SimpleMessage{
 		OrgName: "OKC DIY",

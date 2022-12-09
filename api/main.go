@@ -42,23 +42,25 @@ func main() {
 	router.HandleFunc("POST", "/promoter/", handleNotDoneYet)
 	router.HandleFunc("GET", "/promoter/:promoterID", handleNotDoneYet)
 
-	log.Fatalln(http.ListenAndServe(":8081", router))
+	port := ":8081"
+	log.Printf("listening on port %v", port)
+	log.Fatalln(http.ListenAndServe(port, router))
 }
 
 func handleMethodNotAllowed(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%+v", r.Context())
+	log.Printf("%+v", r)
 	w.WriteHeader(http.StatusMethodNotAllowed)
 	fmt.Fprintf(w, "Don't even try it.")
 }
 
 func handleHealthCheck(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%+v", r.Context())
+	log.Printf("%+v", r)
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Things are looking good.")
 }
 
 func handleNotDoneYet(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%+v", r.Context())
+	log.Printf("%+v", r)
 	w.WriteHeader(http.StatusNotImplemented)
 	fmt.Fprintf(w, "We're working on it.")
 }
